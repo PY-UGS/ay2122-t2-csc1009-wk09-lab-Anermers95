@@ -29,20 +29,40 @@ public class RandomCharacter{
         return (char)(rand.nextInt(max));
     }
 
-    public void isPrime()
+    public boolean isPrime(char temp)
     {
-        char temp = getRandomCharacter();
+        //char temp = getRandomCharacter();
+        if ((int) temp <= 1)
+        {
+            System.out.print(temp + " is not a prime" );  
+            return false;
+        }
 
         if((int)temp % 2 == 0)
-            System.out.print(temp + " is not a prime" );
-            else
-            System.out.print(temp + " is a prime" );      
+        {
+            System.out.print(temp + " is not a prime" );  
+            return false;
+        }       
+
+        else
+        {
+            int sqrt = (int) Math.sqrt(temp)+1;
+            for(int i = 3; i <sqrt; i+=2)
+            {
+                if(temp%i == 0)
+                {
+                    System.out.print(temp + " is not a prime" );  
+                    return false;
+                }
+            }
+        }
+            System.out.print(temp + " is a prime" );
+            return true;       
     }
 
     public static void main(String[] args) {
         RandomCharacter rc = new RandomCharacter();
         
-
         for(int i = 0; i< 15; ++i)
             System.out.print(rc.getRandomLowerCaseLetter());
         System.out.print("\n");
@@ -57,7 +77,13 @@ public class RandomCharacter{
         System.out.print("\n");
 
 
-        rc.isPrime();
+        rc.isPrime(rc.getRandomLowerCaseLetter());
+        System.out.print("\n");
+        rc.isPrime(rc.getRandomUpperCaseLetter());
+        System.out.print("\n");
+        rc.isPrime(rc.getRandomDigitCharacter());
+        System.out.print("\n");
+        rc.isPrime(rc.getRandomCharacter());
         
     }
 
